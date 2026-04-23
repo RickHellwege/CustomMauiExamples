@@ -19,11 +19,13 @@ public static class MauiProgram
 
 		builder.Services.AddMauiBlazorWebView();
 
+        builder.Services.AddTelerikBlazor();
+
 #if DEBUG
 		builder.Services.AddBlazorWebViewDeveloperTools();
 #endif
-		
-		builder.Services.AddSingleton<WeatherForecastService>();
+
+        builder.Services.AddSingleton<WeatherForecastService>();
 
 		return builder.Build();
 	}

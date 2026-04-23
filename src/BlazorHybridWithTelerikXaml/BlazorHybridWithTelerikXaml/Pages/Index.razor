@@ -1,12 +1,30 @@
 ﻿@page "/"
 
+@using BlazorHybridWithTelerikXaml.PdfData
+
 <h3>Telerik XAML controls in MAUI Blazor Hybrid Example</h3>
+
+<TelerikPdfViewer Data="@FileData"
+                  AnnotationMode="@AnnotationMode"
+                  Height="700px"
+                  Width="100%"
+                  Zoom="1.0m">
+</TelerikPdfViewer>
 
 <button @onclick="DoSomethingAsync">Open Telerik XAML RadPopup</button>
 
 @code{
+    private byte[] FileData { get; set; }
+    private PdfViewerAnnotationMode AnnotationMode { get; set; } = PdfViewerAnnotationMode.EnableForms;
+
+    protected override void OnInitialized()
+    {
+        FileData = Convert.FromBase64String(PdfViewerConstants.FormFillingFileBase64);
+    }
+
     private async Task DoSomethingAsync()
     {
         await (App.Current.MainPage as MainPage).ShowTelerikMauiPopup();
+
     }
 }
